@@ -15,7 +15,7 @@ const dummyServices = [
     address: "12 OVATA PL, INVERLOCH VIC",
     speed_tier: "NBN Fast 100Mbps/20Mbps Unlimited",
     technology_type: "FTTN",
-    price: "$95.00",
+    monthly_price: "$95.00",
     usage: {
       current_billing_period: {
         start_date: "2024-01-01",
@@ -60,24 +60,32 @@ const Index = () => {
 
   if (!client) {
     return (
-      <Card className="mt-8">
+      <Card className="mt-8 transition-all duration-200 hover:shadow-md">
         <CardContent className="space-y-4 p-6">
-          <h1 className="text-2xl font-bold text-center mb-6">Aussie Broadband Login</h1>
+          <h1 className="text-2xl font-bold text-center mb-6">Welcome to Aussie Broadband</h1>
           <Input
             type="text"
             placeholder="Username"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            className="transition-all duration-200 hover:border-sidebar-primary focus:border-sidebar-primary"
           />
           <Input
             type="password"
             placeholder="Password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
+            className="transition-all duration-200 hover:border-sidebar-primary focus:border-sidebar-primary"
           />
           <div className="flex gap-4">
-            <Button onClick={handleLogin} className="w-full">Login</Button>
-            <Button variant="secondary" onClick={handleBypass} className="w-full">
+            <Button onClick={handleLogin} className="w-full bg-sidebar-primary hover:bg-sidebar-primary/90 transition-colors duration-200">
+              Login
+            </Button>
+            <Button 
+              variant="outline" 
+              onClick={handleBypass} 
+              className="w-full border-sidebar-primary text-sidebar-primary hover:bg-sidebar-primary/10 transition-colors duration-200"
+            >
               Use Dummy Data
             </Button>
           </div>
@@ -92,22 +100,25 @@ const Index = () => {
     <div className="space-y-6">
       <div className="relative">
         <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
-        <Input className="pl-10" placeholder="Search Services and Orders" />
+        <Input 
+          className="pl-10 transition-all duration-200 hover:border-sidebar-primary focus:border-sidebar-primary" 
+          placeholder="Search Services and Orders" 
+        />
       </div>
 
       <div className="space-y-2">
         <h2 className="text-xl text-gray-600">View, change and edit your active services</h2>
         
-        <Card className="hover:bg-gray-50 transition-colors cursor-pointer">
+        <Card className="hover:bg-gray-50 transition-all duration-200 hover:shadow-md cursor-pointer">
           <CardContent className="flex items-center justify-between p-4">
             <div className="flex items-center gap-3">
-              <PlusCircle className="h-6 w-6 text-gray-500" />
+              <PlusCircle className="h-6 w-6 text-sidebar-primary" />
               <div>
                 <h3 className="font-semibold">Add a new service</h3>
                 <p className="text-sm text-gray-600">Select a plan to add to your account</p>
               </div>
             </div>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="text-sidebar-primary hover:bg-sidebar-primary/10">
               <PlusCircle className="h-5 w-5" />
             </Button>
           </CardContent>
@@ -117,11 +128,11 @@ const Index = () => {
       <div className="space-y-4">
         <h2 className="text-xl font-semibold">NBN</h2>
         {displayServices?.map((service) => (
-          <Card key={service.service_id} className="hover:bg-gray-50 transition-colors">
+          <Card key={service.service_id} className="hover:bg-gray-50 transition-all duration-200 hover:shadow-md">
             <CardContent className="p-6 space-y-4">
               <div className="flex items-start justify-between">
                 <div className="flex items-center gap-3">
-                  <Globe className="h-6 w-6 text-gray-500" />
+                  <Globe className="h-6 w-6 text-sidebar-primary" />
                   <div>
                     <h3 className="font-semibold">NBN</h3>
                     <p className="text-sm text-gray-600">{service.address}</p>
@@ -132,11 +143,11 @@ const Index = () => {
 
               <div className="space-y-4 pt-4">
                 <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
                     <Edit2 className="mr-2 h-4 w-4" />
                     Edit Plan
                   </Button>
-                  <Button variant="outline" className="flex-1">
+                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
                     <MapPin className="mr-2 h-4 w-4" />
                     Relocate
                   </Button>
@@ -148,12 +159,12 @@ const Index = () => {
                     <span>Month-to-month</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-xl font-bold">{service.price}/month</span>
+                    <span className="text-xl font-bold">{service.monthly_price}/month</span>
                     <span className="text-gray-600">Next bill: 25-01-2025</span>
                   </div>
                 </div>
 
-                <Button variant="outline" className="w-full">
+                <Button variant="outline" className="w-full hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
                   <CreditCard className="mr-2 h-4 w-4" />
                   Billing and payment
                 </Button>
@@ -161,13 +172,13 @@ const Index = () => {
                 <div className="space-y-2">
                   <h4 className="font-semibold">Usage</h4>
                   <div className="flex items-center gap-2">
-                    <BarChart className="h-5 w-5 text-gray-500" />
+                    <BarChart className="h-5 w-5 text-sidebar-primary" />
                     <span>{service.usage.current_billing_period.total_downloaded.toFixed(2)}GB used</span>
                     <span className="text-gray-500 ml-auto">Unlimited Data</span>
                   </div>
                   <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
                     <div 
-                      className="h-full bg-green-600 rounded-full"
+                      className="h-full bg-sidebar-primary rounded-full transition-all duration-1000"
                       style={{ width: `${Math.min((service.usage.current_billing_period.total_downloaded / 1000) * 100, 100)}%` }}
                     />
                   </div>
