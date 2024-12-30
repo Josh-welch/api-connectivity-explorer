@@ -2,20 +2,36 @@ import { toast } from "sonner";
 
 interface AussieBBService {
   service_id: string;
-  // Add other service properties based on API response
-}
-
-interface UsageData {
-  // Add usage data properties based on API response
+  service_type: string;
+  status: string;
+  address: string;
+  speed_tier: string;
+  technology_type: string;
+  usage?: {
+    current_billing_period: {
+      start_date: string;
+      end_date: string;
+      total_downloaded: number;
+      total_uploaded: number;
+      total_usage: number;
+    };
+  };
 }
 
 export class AussieBBClient {
   private baseUrl = "https://myaussie-api.aussiebroadband.com.au";
   private token: string | null = null;
+  public isDummy: boolean = false;
 
-  constructor(private username: string, private password: string) {}
+  constructor(private username: string, private password: string) {
+    this.isDummy = username === "dummy" && password === "dummy";
+  }
 
   async login(): Promise<boolean> {
+    if (this.isDummy) {
+      return true;
+    }
+
     try {
       const response = await fetch(`${this.baseUrl}/auth`, {
         method: 'POST',
@@ -43,6 +59,11 @@ export class AussieBBClient {
   }
 
   async getServices(): Promise<AussieBBService[]> {
+    if (this.isDummy) {
+      // Return empty array as the dummy data is handled in the component
+      return [];
+    }
+
     if (!this.token) {
       throw new Error('Not authenticated');
     }
@@ -63,30 +84,6 @@ export class AussieBBClient {
       console.error('Get services error:', error);
       toast.error("Failed to fetch services");
       return [];
-    }
-  }
-
-  async getUsage(serviceId: string): Promise<UsageData | null> {
-    if (!this.token) {
-      throw new Error('Not authenticated');
-    }
-
-    try {
-      const response = await fetch(`${this.baseUrl}/services/${serviceId}/usage`, {
-        headers: {
-          'Authorization': `Bearer ${this.token}`,
-        },
-      });
-
-      if (!response.ok) {
-        throw new Error('Failed to fetch usage data');
-      }
-
-      return response.json();
-    } catch (error) {
-      console.error('Get usage error:', error);
-      toast.error("Failed to fetch usage data");
-      return null;
     }
   }
 }
