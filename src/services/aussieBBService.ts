@@ -7,6 +7,7 @@ interface AussieBBService {
   address: string;
   speed_tier: string;
   technology_type: string;
+  monthly_price: string;
   usage?: {
     current_billing_period: {
       start_date: string;
