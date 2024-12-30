@@ -3,9 +3,9 @@ import { User, MapPin, Mail, Share2, Lock, Edit } from "lucide-react";
 
 const Profile = () => {
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       <section>
-        <h2 className="text-2xl font-semibold mb-4">Account Details</h2>
+        <h2 className="text-2xl font-semibold mb-6">Account Details</h2>
         <Card className="p-6 space-y-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center gap-3">
