@@ -19,21 +19,21 @@ const AccountDetails = ({ name, address, email, customerNumber }: AccountDetails
   return (
     <section>
       <Card className="overflow-hidden">
-        <div className="p-6 border-b">
+        <div className="p-4 border-b">
           <h2 className="text-xl font-semibold">Account Details</h2>
         </div>
-        <div className="divide-y">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
           {details.map((detail, index) => (
             <div 
               key={index} 
-              className="p-4 sm:p-6 flex items-center gap-3 hover:bg-accent/50 transition-colors"
+              className="p-4 rounded-lg bg-accent/50 hover:bg-accent transition-colors flex flex-col items-center text-center space-y-2"
             >
-              <div className="flex items-center justify-center size-10 rounded-full bg-primary/10">
+              <div className="flex items-center justify-center size-12 rounded-full bg-primary/10">
                 {detail.icon}
               </div>
               <div>
                 <p className="font-medium">{detail.label}</p>
-                <p className="text-sm text-muted-foreground">{detail.value}</p>
+                <p className="text-sm text-muted-foreground mt-1">{detail.value}</p>
               </div>
             </div>
           ))}
