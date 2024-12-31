@@ -26,44 +26,46 @@ const Profile = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-xl mx-auto pb-8">
-      <ProfileHeader name={accountDetails.name} />
-      
-      <Tabs defaultValue="account" className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
-          <TabsTrigger value="account">Account</TabsTrigger>
-          <TabsTrigger value="contacts">Contacts</TabsTrigger>
-          <TabsTrigger value="preferences">Preferences</TabsTrigger>
-        </TabsList>
+    <div className="container mx-auto py-8 px-4">
+      <div className="max-w-4xl mx-auto space-y-8">
+        <ProfileHeader name={accountDetails.name} />
         
-        <TabsContent value="account" className="space-y-4 mt-4">
-          <AccountDetails {...accountDetails} />
-          <RatingFeedback 
-            rating={rating}
-            setRating={setRating}
-          />
-        </TabsContent>
-        
-        <TabsContent value="contacts" className="mt-4">
-          <ContactsList 
-            contacts={contacts}
-            setContacts={setContacts}
-          />
-        </TabsContent>
-        
-        <TabsContent value="preferences" className="space-y-4 mt-4">
-          <CommunicationPreferences 
-            smsNotifications={smsNotifications}
-            setSmsNotifications={setSmsNotifications}
-            emailNotifications={emailNotifications}
-            setEmailNotifications={setEmailNotifications}
-          />
-          <AppPreferences 
-            darkMode={darkMode}
-            setDarkMode={setDarkMode}
-          />
-        </TabsContent>
-      </Tabs>
+        <Tabs defaultValue="account" className="w-full">
+          <TabsList className="grid w-full grid-cols-3 mb-8">
+            <TabsTrigger value="account">Account</TabsTrigger>
+            <TabsTrigger value="contacts">Contacts</TabsTrigger>
+            <TabsTrigger value="preferences">Preferences</TabsTrigger>
+          </TabsList>
+          
+          <TabsContent value="account" className="space-y-6">
+            <AccountDetails {...accountDetails} />
+            <RatingFeedback 
+              rating={rating}
+              setRating={setRating}
+            />
+          </TabsContent>
+          
+          <TabsContent value="contacts">
+            <ContactsList 
+              contacts={contacts}
+              setContacts={setContacts}
+            />
+          </TabsContent>
+          
+          <TabsContent value="preferences" className="space-y-6">
+            <CommunicationPreferences 
+              smsNotifications={smsNotifications}
+              setSmsNotifications={setSmsNotifications}
+              emailNotifications={emailNotifications}
+              setEmailNotifications={setEmailNotifications}
+            />
+            <AppPreferences 
+              darkMode={darkMode}
+              setDarkMode={setDarkMode}
+            />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 };
