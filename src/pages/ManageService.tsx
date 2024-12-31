@@ -93,11 +93,13 @@ const ManageService = () => {
               <h3 className="font-medium">Self Test</h3>
             </div>
             
-            <div className="h-32 w-full flex items-center justify-center border rounded-lg relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-1 h-16 bg-sidebar-primary rounded-full animate-heartbeat" />
+            <div className="h-32 w-full flex items-center justify-center border rounded-lg relative overflow-hidden bg-black/5">
+              <div className="absolute inset-0 flex items-center">
+                <div className="h-px w-full bg-sidebar-primary/20" />
               </div>
-              <p className="text-muted-foreground relative">Connection status graph</p>
+              <div className="absolute inset-0 flex items-center">
+                <div className="h-16 w-1 bg-sidebar-primary rounded-full animate-heartbeat origin-left" />
+              </div>
             </div>
 
             <div className="space-y-2">

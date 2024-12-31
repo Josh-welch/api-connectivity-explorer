@@ -28,14 +28,20 @@ export default {
           to: { height: '0' }
         },
         heartbeat: {
-          '0%, 100%': { transform: 'scale(1)' },
-          '50%': { transform: 'scale(1.3)' },
+          '0%, 100%': { transform: 'translateX(0%) scaleY(1)' },
+          '10%': { transform: 'translateX(10%) scaleY(1)' },
+          '15%': { transform: 'translateX(15%) scaleY(2)' },
+          '20%': { transform: 'translateX(20%) scaleY(0.5)' },
+          '25%': { transform: 'translateX(25%) scaleY(2.5)' },
+          '30%': { transform: 'translateX(30%) scaleY(0.5)' },
+          '35%': { transform: 'translateX(35%) scaleY(1)' },
+          '100%': { transform: 'translateX(100%) scaleY(1)' }
         }
       },
       animation: {
         'accordion-down': 'accordion-down 0.2s ease-out',
         'accordion-up': 'accordion-up 0.2s ease-out',
-        'heartbeat': 'heartbeat 1s ease-in-out infinite',
+        'heartbeat': 'heartbeat 3s linear infinite',
       },
 			colors: {
 				border: 'hsl(var(--border))',
