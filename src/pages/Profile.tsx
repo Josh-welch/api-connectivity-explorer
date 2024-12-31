@@ -1,5 +1,5 @@
 import { Card } from "@/components/ui/card";
-import { User, UserPlus, MessageSquare, Star, Moon, Mail, ChevronRight, Check, X } from "lucide-react";
+import { User, UserPlus, MessageSquare, Star, Moon, Mail, ChevronRight, Check, X, Edit } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import { Switch } from "@/components/ui/switch";
