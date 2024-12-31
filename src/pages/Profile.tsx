@@ -25,7 +25,7 @@ const Profile = () => {
   };
 
   return (
-    <div className="space-y-4 max-w-2xl mx-auto pb-8">
+    <div className="space-y-2 max-w-xl mx-auto pb-8">
       <ProfileHeader name={accountDetails.name} />
       
       <AccountDetails {...accountDetails} />

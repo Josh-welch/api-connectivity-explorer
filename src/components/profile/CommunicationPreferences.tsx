@@ -18,18 +18,18 @@ const CommunicationPreferences = ({
 }: CommunicationPreferencesProps) => {
   return (
     <Card className="overflow-hidden">
-      <div className="p-4 border-b">
+      <div className="p-2 border-b">
         <h2 className="text-lg font-semibold">Outage Communications</h2>
       </div>
-      <div className="p-4 space-y-4">
+      <div className="p-2 space-y-2">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="flex items-center justify-center size-8 rounded-full bg-primary/10">
               <MessageSquare className="h-4 w-4 text-primary" />
             </div>
-            <div>
-              <p className="font-medium text-sm">SMS Notifications</p>
-              <p className="text-xs text-muted-foreground">Receive SMS updates about outages</p>
+            <div className="min-w-0">
+              <p className="text-sm font-medium truncate">SMS Notifications</p>
+              <p className="text-xs text-muted-foreground truncate">Receive SMS updates about outages</p>
             </div>
           </div>
           <div className="flex gap-1">
@@ -64,9 +64,9 @@ const CommunicationPreferences = ({
             <div className="flex items-center justify-center size-8 rounded-full bg-primary/10">
               <Mail className="h-4 w-4 text-primary" />
             </div>
-            <div>
-              <p className="font-medium text-sm">Email Notifications</p>
-              <p className="text-xs text-muted-foreground">Receive email updates about outages</p>
+            <div className="min-w-0">
+              <p className="text-sm font-medium truncate">Email Notifications</p>
+              <p className="text-xs text-muted-foreground truncate">Receive email updates about outages</p>
             </div>
           </div>
           <Switch checked={emailNotifications} onCheckedChange={setEmailNotifications} />

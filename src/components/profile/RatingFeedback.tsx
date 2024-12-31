@@ -10,11 +10,11 @@ interface RatingFeedbackProps {
 const RatingFeedback = ({ rating, setRating }: RatingFeedbackProps) => {
   return (
     <Card className="overflow-hidden">
-      <div className="p-4 border-b">
+      <div className="p-2 border-b">
         <h2 className="text-lg font-semibold">Rating & Feedback</h2>
       </div>
-      <div className="p-4 space-y-3">
-        <p className="font-medium text-sm">How are you enjoying our app?</p>
+      <div className="p-2 space-y-2">
+        <p className="text-sm font-medium">How are you enjoying our app?</p>
         <div className="flex gap-1">
           {[1, 2, 3, 4, 5].map((star) => (
             <Button
@@ -22,10 +22,10 @@ const RatingFeedback = ({ rating, setRating }: RatingFeedbackProps) => {
               variant="ghost"
               size="icon"
               onClick={() => setRating(star)}
-              className="size-8"
+              className="size-7"
             >
               <Star 
-                className={`h-5 w-5 ${rating >= star ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
+                className={`h-4 w-4 ${rating >= star ? 'fill-primary text-primary' : 'text-muted-foreground'}`} 
               />
             </Button>
           ))}
