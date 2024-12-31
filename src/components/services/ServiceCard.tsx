@@ -1,7 +1,7 @@
 import { Card, CardContent } from "@/components/ui/card";
-import { Globe, MapPin, Wifi, CheckCircle2 } from "lucide-react";
-import ManageServiceDialog from "./ManageServiceDialog";
-import BillingDialog from "./BillingDialog";
+import { Button } from "@/components/ui/button";
+import { Globe, MapPin, Wifi, CheckCircle2, Edit2, CreditCard } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface ServiceCardProps {
   service: {
@@ -21,6 +21,8 @@ interface ServiceCardProps {
 }
 
 const ServiceCard = ({ service }: ServiceCardProps) => {
+  const navigate = useNavigate();
+
   return (
     <Card className="overflow-hidden hover:shadow-lg transition-all duration-200">
       <CardContent className="p-0">
@@ -78,15 +80,33 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
           )}
 
           <div className="flex gap-3">
-            <ManageServiceDialog 
-              serviceId={service.service_id}
-              speedTier={service.speed_tier}
-              technologyType={service.technology_type}
-            />
-            <BillingDialog 
-              serviceId={service.service_id}
-              monthlyPrice={service.monthly_price}
-            />
+            <Button 
+              variant="outline" 
+              className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200"
+              onClick={() => navigate('/manage-service', {
+                state: {
+                  serviceId: service.service_id,
+                  speedTier: service.speed_tier,
+                  technologyType: service.technology_type
+                }
+              })}
+            >
+              <Edit2 className="mr-2 h-4 w-4" />
+              Manage Plan
+            </Button>
+            <Button 
+              variant="outline" 
+              className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200"
+              onClick={() => navigate('/service-billing', {
+                state: {
+                  serviceId: service.service_id,
+                  monthlyPrice: service.monthly_price
+                }
+              })}
+            >
+              <CreditCard className="mr-2 h-4 w-4" />
+              Billing
+            </Button>
           </div>
         </div>
       </CardContent>
