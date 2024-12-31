@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { AussieBBClient } from "@/services/aussieBBService";
 import { useQuery } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { Search, PlusCircle, Globe, Edit2, MapPin, CreditCard, BarChart } from "lucide-react";
+import { Search, PlusCircle, Globe, Edit2, MapPin, CreditCard, BarChart, Wifi, CheckCircle2 } from "lucide-react";
 
 const dummyServices = [
   {
@@ -106,16 +106,18 @@ const Index = () => {
         />
       </div>
 
-      <div className="space-y-2">
-        <h2 className="text-xl text-gray-600">View, change and edit your active services</h2>
+      <div className="space-y-4">
+        <h2 className="text-xl font-semibold text-gray-800 dark:text-gray-200">Your Services</h2>
         
-        <Card className="hover:bg-gray-50 transition-all duration-200 hover:shadow-md cursor-pointer">
-          <CardContent className="flex items-center justify-between p-4">
-            <div className="flex items-center gap-3">
-              <PlusCircle className="h-6 w-6 text-sidebar-primary" />
+        <Card className="bg-gradient-to-br from-sidebar-primary/5 to-transparent hover:shadow-lg transition-all duration-200 cursor-pointer border-dashed border-2 border-sidebar-primary/30">
+          <CardContent className="flex items-center justify-between p-6">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-sidebar-primary/10 rounded-full">
+                <PlusCircle className="h-6 w-6 text-sidebar-primary" />
+              </div>
               <div>
-                <h3 className="font-semibold">Add a new service</h3>
-                <p className="text-sm text-gray-600">Select a plan to add to your account</p>
+                <h3 className="font-semibold text-lg">Add a new service</h3>
+                <p className="text-sm text-gray-600 dark:text-gray-400">Select a plan to add to your account</p>
               </div>
             </div>
             <Button variant="ghost" size="icon" className="text-sidebar-primary hover:bg-sidebar-primary/10">
@@ -126,62 +128,74 @@ const Index = () => {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-xl font-semibold">NBN</h2>
+        <div className="flex items-center gap-2">
+          <Wifi className="h-5 w-5 text-sidebar-primary" />
+          <h2 className="text-xl font-semibold">NBN Services</h2>
+        </div>
+        
         {displayServices?.map((service) => (
-          <Card key={service.service_id} className="hover:bg-gray-50 transition-all duration-200 hover:shadow-md">
-            <CardContent className="p-6 space-y-4">
-              <div className="flex items-start justify-between">
-                <div className="flex items-center gap-3">
-                  <Globe className="h-6 w-6 text-sidebar-primary" />
-                  <div>
-                    <h3 className="font-semibold">NBN</h3>
-                    <p className="text-sm text-gray-600">{service.address}</p>
+          <Card key={service.service_id} className="overflow-hidden hover:shadow-lg transition-all duration-200">
+            <CardContent className="p-0">
+              <div className="bg-sidebar-primary/5 border-b p-4">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="p-2 bg-white rounded-full shadow-sm">
+                      <Globe className="h-5 w-5 text-sidebar-primary" />
+                    </div>
+                    <div>
+                      <div className="flex items-center gap-2">
+                        <h3 className="font-semibold">NBN Service</h3>
+                        <span className="flex items-center gap-1 text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">
+                          <CheckCircle2 className="h-3 w-3" /> Active
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{service.service_id}</p>
+                    </div>
                   </div>
+                  <span className="text-xl font-bold text-sidebar-primary">{service.monthly_price}<span className="text-sm font-normal">/mo</span></span>
                 </div>
-                <span className="text-sm text-gray-500">{service.service_id}</span>
               </div>
 
-              <div className="space-y-4 pt-4">
-                <div className="flex gap-4">
-                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
-                    <Edit2 className="mr-2 h-4 w-4" />
-                    Edit Plan
-                  </Button>
-                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
-                    <MapPin className="mr-2 h-4 w-4" />
-                    Relocate
-                  </Button>
-                </div>
-
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-gray-600">Contract</span>
-                    <span>Month-to-month</span>
+              <div className="p-6 space-y-6">
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                      <MapPin className="h-4 w-4" />
+                      <span className="text-sm">Installation Address</span>
+                    </div>
+                    <p className="font-medium">{service.address}</p>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-xl font-bold">{service.monthly_price}/month</span>
-                    <span className="text-gray-600">Next bill: 25-01-2025</span>
+                  <div className="space-y-2">
+                    <div className="flex items-center gap-2 text-gray-600 dark:text-gray-400">
+                      <Wifi className="h-4 w-4" />
+                      <span className="text-sm">Plan Details</span>
+                    </div>
+                    <p className="font-medium">{service.speed_tier}</p>
                   </div>
                 </div>
 
-                <Button variant="outline" className="w-full hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
-                  <CreditCard className="mr-2 h-4 w-4" />
-                  Billing and payment
-                </Button>
-
-                <div className="space-y-2">
-                  <h4 className="font-semibold">Usage</h4>
-                  <div className="flex items-center gap-2">
-                    <BarChart className="h-5 w-5 text-sidebar-primary" />
-                    <span>{service.usage.current_billing_period.total_downloaded.toFixed(2)}GB used</span>
-                    <span className="text-gray-500 ml-auto">Unlimited Data</span>
+                <div className="space-y-3">
+                  <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                    <span>Monthly Usage</span>
+                    <span>{service.usage.current_billing_period.total_usage.toFixed(2)} GB used</span>
                   </div>
-                  <div className="h-2 bg-gray-100 rounded-full overflow-hidden">
+                  <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                     <div 
                       className="h-full bg-sidebar-primary rounded-full transition-all duration-1000"
-                      style={{ width: `${Math.min((service.usage.current_billing_period.total_downloaded / 1000) * 100, 100)}%` }}
+                      style={{ width: `${Math.min((service.usage.current_billing_period.total_usage / 1000) * 100, 100)}%` }}
                     />
                   </div>
+                </div>
+
+                <div className="flex gap-3">
+                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
+                    <Edit2 className="mr-2 h-4 w-4" />
+                    Manage Plan
+                  </Button>
+                  <Button variant="outline" className="flex-1 hover:bg-sidebar-primary/10 hover:text-sidebar-primary transition-colors duration-200">
+                    <CreditCard className="mr-2 h-4 w-4" />
+                    Billing
+                  </Button>
                 </div>
               </div>
             </CardContent>
