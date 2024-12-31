@@ -12,7 +12,7 @@ interface ServiceCardProps {
     speed_tier: string;
     technology_type: string;
     monthly_price: string;
-    usage: {
+    usage?: {
       current_billing_period: {
         total_usage: number;
       };
@@ -62,18 +62,20 @@ const ServiceCard = ({ service }: ServiceCardProps) => {
             </div>
           </div>
 
-          <div className="space-y-3">
-            <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
-              <span>Monthly Usage</span>
-              <span>{service.usage.current_billing_period.total_usage.toFixed(2)} GB used</span>
+          {service.usage && (
+            <div className="space-y-3">
+              <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-400">
+                <span>Monthly Usage</span>
+                <span>{service.usage.current_billing_period.total_usage.toFixed(2)} GB used</span>
+              </div>
+              <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
+                <div 
+                  className="h-full bg-sidebar-primary rounded-full transition-all duration-1000"
+                  style={{ width: `${Math.min((service.usage.current_billing_period.total_usage / 1000) * 100, 100)}%` }}
+                />
+              </div>
             </div>
-            <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-sidebar-primary rounded-full transition-all duration-1000"
-                style={{ width: `${Math.min((service.usage.current_billing_period.total_usage / 1000) * 100, 100)}%` }}
-              />
-            </div>
-          </div>
+          )}
 
           <div className="flex gap-3">
             <ManageServiceDialog 
