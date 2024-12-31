@@ -98,7 +98,7 @@ const ManageService = () => {
                 <div className="h-px w-full bg-sidebar-primary/20" />
               </div>
               <div className="absolute inset-0 flex items-center">
-                <div className="h-16 w-1 bg-sidebar-primary rounded-full animate-heartbeat origin-left" />
+                <div className="h-16 w-1.5 bg-sidebar-primary rounded-full animate-heartbeat" />
               </div>
             </div>
 
